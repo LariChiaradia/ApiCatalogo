@@ -229,3 +229,4 @@ C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\bin\Debug\net8.0\
 C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
+C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\obj\Debug\net8.0\ApiCatalogo.sourcelink.json
