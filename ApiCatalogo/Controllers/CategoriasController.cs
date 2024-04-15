@@ -20,33 +20,62 @@ namespace ApiCatalogo.Controllers
         [HttpGet("produtos")]
         public ActionResult<IEnumerable<Categoria>> GetCategoriasProdutos()
         {
-            return _context.Categorias.Include(p => p.Produtos).ToList();
+            try
+            {
+                var listaProdutos = _context.Categorias.Include(p => p.Produtos).ToList();
+                return listaProdutos;
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, 
+                    "Ocorreu um problema ao tratar a solicitação.");
+            }
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<Categoria>> Get()
         {
-            var categorias = _context.Categorias.AsNoTracking().ToList();
 
-            if (categorias is null)
+            try
             {
-                return NotFound("Categorias não encontradas");
-            }
+                var categorias = _context.Categorias.AsNoTracking().ToList();
 
-            return categorias;
+                if (categorias is null)
+                {
+                    return NotFound("Categorias não encontradas");
+                }
+
+                return categorias;
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                     "Ocorreu um problema ao tratar a solicitação.");
+            }
         }
 
         [HttpGet("{id:int}", Name ="ObterCategoria")]
         public ActionResult<Categoria> Get(int id)
         {
-            var categoria = _context.Categorias.FirstOrDefault(c => c.CategoriaId == id);
-
-            if (categoria is null)
+            try
             {
-                return NotFound("Categoria não foi localizada");
-            }
+                var categoria = _context.Categorias.FirstOrDefault(c => c.CategoriaId == id);
 
-            return categoria;
+                if (categoria == null)
+                {
+                    return NotFound("Categoria não foi localizada");
+                }
+
+                return categoria;
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Ocorreu um problema ao tratar a solicitação.");
+            }
         }
 
         [HttpPost]
@@ -54,7 +83,7 @@ namespace ApiCatalogo.Controllers
         {
             if (categoria is null)
             {
-                return BadRequest();
+                return BadRequest("Dados inválidos");
             }
 
             _context.Categorias.Add(categoria);
@@ -69,7 +98,7 @@ namespace ApiCatalogo.Controllers
         {
             if(id != categoria.CategoriaId)
             {
-                return BadRequest();
+                return BadRequest("Dados inválidos");
             }
             _context.Entry(categoria).State = EntityState.Modified;
             _context.SaveChanges();
@@ -84,7 +113,7 @@ namespace ApiCatalogo.Controllers
 
             if (categoria is null)
             {
-                return NotFound("Categoria não localizada");
+                return NotFound("Categoria com não localizada");
             }
 
             _context.Remove(categoria);
