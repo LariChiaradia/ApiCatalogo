@@ -40,7 +40,7 @@ namespace ApiCatalogo.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(Produto produto)
+        public ActionResult Post([FromBody]Produto produto)
         {
             if (produto is null)
             {
