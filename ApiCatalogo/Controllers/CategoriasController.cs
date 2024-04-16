@@ -14,11 +14,14 @@ namespace ApiCatalogo.Controllers
     {
         public readonly AppDbContext _context;
         public readonly IConfiguration _configuration;
+        public readonly ILogger _logger;
 
-        public CategoriasController(AppDbContext context, IConfiguration configuration)
+        public CategoriasController(AppDbContext context, IConfiguration configuration,
+            ILogger<CategoriasController> logger)
         {
             _context = context;
             _configuration = configuration;
+            _logger = logger;
         }
 
         [HttpGet("LerArquivoConfiguracao")]
@@ -49,6 +52,7 @@ namespace ApiCatalogo.Controllers
         [HttpGet("produtos")]
         public ActionResult<IEnumerable<Categoria>> GetCategoriasProdutos()
         {
+            _logger.LogInformation("========================== GET api/categorias/produtos =======================");
             try
             {
                 var listaProdutos = _context.Categorias.Include(p => p.Produtos).ToList();
@@ -66,6 +70,7 @@ namespace ApiCatalogo.Controllers
         [ServiceFilter(typeof(ApiLoggingFilter))]
         public ActionResult<IEnumerable<Categoria>> Get()
         {
+            _logger.LogInformation("========================== GET api/categorias =======================");
 
             try
             {
@@ -100,8 +105,11 @@ namespace ApiCatalogo.Controllers
             {
                 var categoria = _context.Categorias.FirstOrDefault(c => c.CategoriaId == id);
 
+                _logger.LogInformation($"==========================GET api/categorias/id = {id} =======================");
+                
                 if (categoria == null)
                 {
+                    _logger.LogInformation($"==========================GET api/categorias/id = {id} NOT FOUND =======================");
                     return NotFound("Categoria não foi localizada");
                 }
 
