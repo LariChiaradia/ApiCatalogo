@@ -53,17 +53,8 @@ namespace ApiCatalogo.Controllers
         public ActionResult<IEnumerable<Categoria>> GetCategoriasProdutos()
         {
             _logger.LogInformation("========================== GET api/categorias/produtos =======================");
-            try
-            {
                 var listaProdutos = _context.Categorias.Include(p => p.Produtos).ToList();
                 return listaProdutos;
-            }
-            catch (Exception)
-            {
-
-                return StatusCode(StatusCodes.Status500InternalServerError, 
-                    "Ocorreu um problema ao tratar a solicitação.");
-            }
         }
 
         [HttpGet]
@@ -72,8 +63,6 @@ namespace ApiCatalogo.Controllers
         {
             _logger.LogInformation("========================== GET api/categorias =======================");
 
-            try
-            {
                 var categorias = _context.Categorias.AsNoTracking().ToList();
 
                 if (categorias is null)
@@ -82,27 +71,12 @@ namespace ApiCatalogo.Controllers
                 }
 
                 return categorias;
-            }
-            catch (Exception)
-            {
-
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                     "Ocorreu um problema ao tratar a solicitação.");
-            }
         }
 
         [HttpGet("{id:int}", Name ="ObterCategoria")]
         public ActionResult<Categoria> Get(int id)
         {
-            //throw new Exception("Exceção ao retornar a categoria pelo id");
-            //string[] teste = null;
-            //if(teste.Length > 0)
-            //{
 
-            //}
-
-            try
-            {
                 var categoria = _context.Categorias.FirstOrDefault(c => c.CategoriaId == id);
 
                 _logger.LogInformation($"==========================GET api/categorias/id = {id} =======================");
@@ -112,15 +86,7 @@ namespace ApiCatalogo.Controllers
                     _logger.LogInformation($"==========================GET api/categorias/id = {id} NOT FOUND =======================");
                     return NotFound("Categoria não foi localizada");
                 }
-
-                return categoria;
-            }
-            catch (Exception)
-            {
-
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Ocorreu um problema ao tratar a solicitação.");
-            }
+                return Ok(categoria);
         }
 
         [HttpPost]
