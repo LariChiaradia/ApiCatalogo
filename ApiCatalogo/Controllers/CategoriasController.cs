@@ -1,4 +1,5 @@
 ﻿using ApiCatalogo.Context;
+using ApiCatalogo.Filters;
 using ApiCatalogo.Models;
 using ApiCatalogo.Services;
 using Microsoft.AspNetCore.Http;
@@ -62,6 +63,7 @@ namespace ApiCatalogo.Controllers
         }
 
         [HttpGet]
+        [ServiceFilter(typeof(ApiLoggingFilter))]
         public ActionResult<IEnumerable<Categoria>> Get()
         {
 
@@ -88,11 +90,11 @@ namespace ApiCatalogo.Controllers
         public ActionResult<Categoria> Get(int id)
         {
             //throw new Exception("Exceção ao retornar a categoria pelo id");
-            string[] teste = null;
-            if(teste.Length > 0)
-            {
+            //string[] teste = null;
+            //if(teste.Length > 0)
+            //{
 
-            }
+            //}
 
             try
             {
