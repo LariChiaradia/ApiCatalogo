@@ -14,24 +14,16 @@ namespace ApiCatalogo.Controllers
     [ApiController]
     public class CategoriasController : ControllerBase
     {
-        private readonly ICategoriaRepository _repository;
+        private readonly IRepository<Categoria> _repository;
         private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
 
-        public CategoriasController(ICategoriaRepository repository, IConfiguration configuration,
+        public CategoriasController(IRepository<Categoria> repository, IConfiguration configuration,
             ILogger<CategoriasController> logger)
         {
             _repository = repository;
             _configuration = configuration;
             _logger = logger;
-        }
-
-        [HttpGet("produtos")]
-        public ActionResult<IEnumerable<Categoria>> GetCategoriasProdutos()
-        {
-            _logger.LogInformation("========================== GET api/categorias/produtos =======================");
-                var listaProdutos = _repository.GetCategoriasProdutos();
-                return Ok(listaProdutos);
         }
 
         [HttpGet]
@@ -40,7 +32,7 @@ namespace ApiCatalogo.Controllers
         {
             _logger.LogInformation("========================== GET api/categorias =======================");
 
-            var categorias = _repository.GetCategorias();
+            var categorias = _repository.GetAll();
             return Ok(categorias);
         }
 
@@ -48,9 +40,9 @@ namespace ApiCatalogo.Controllers
         public ActionResult<Categoria> Get(int id)
         {
 
-                var categoria = _repository.GetCategoria(id);
+            var categoria = _repository.Get(c => c.CategoriaId == id);
 
-                _logger.LogInformation($"==========================GET api/categorias/id = {id} =======================");
+            _logger.LogInformation($"==========================GET api/categorias/id = {id} =======================");
                 
                 if (categoria is null)
                 {
@@ -91,7 +83,7 @@ namespace ApiCatalogo.Controllers
         [HttpDelete("{id:int}")]
         public ActionResult Delete(int id)
         {
-            var categoria = _repository.GetCategoria(id);
+            var categoria = _repository.Get(c => c.CategoriaId == id);
 
             if (categoria is null)
             {
@@ -99,7 +91,7 @@ namespace ApiCatalogo.Controllers
                 return NotFound($"Categoria com id = {id} não foi localizada.");
             }
 
-            var categoriaExcluida = _repository.Delete(id);
+            var categoriaExcluida = _repository.Delete(categoria);
 
             return Ok(categoriaExcluida);
         }
