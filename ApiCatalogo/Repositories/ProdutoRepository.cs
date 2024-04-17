@@ -1,6 +1,7 @@
 ﻿using ApiCatalogo.Context;
 using ApiCatalogo.Models;
 using ApiCatalogo.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiCatalogo.Repositories
 {
@@ -13,30 +14,63 @@ namespace ApiCatalogo.Repositories
             _context = context;
         }
 
-        public IEnumerable<Produto> GetProdutos()
+        public IQueryable<Produto> GetProdutos()
         {
-            throw new NotImplementedException();
+            var produtos = _context.Produtos;
+            return produtos;
         }
+    
 
         public Produto GetProduto(int id)
         {
-            throw new NotImplementedException();
+            var produto = _context.Produtos.FirstOrDefault(p => p.ProdutoId == id);
+
+            if (produto is null)
+            {
+                throw new InvalidOperationException("Produto é null");
+            }
+            return produto;
         }
 
         public Produto Create(Produto produto)
         {
-            throw new NotImplementedException();
+            if (produto is null)
+            {
+                throw new InvalidOperationException("Produto é null");
+            }
+
+            _context.Produtos.Add(produto);
+            _context.SaveChanges();
+            return produto;
         }
 
-        public Produto Update(Produto produto)
+        public bool Update(Produto produto)
         {
-            throw new NotImplementedException();
+            if(produto is null)
+            {
+                throw new ArgumentNullException(nameof(produto));
+            }
+
+            if (_context.Produtos.Any(p => p.ProdutoId == produto.ProdutoId))
+            {
+                _context.Update(produto);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
-        public Produto Delete(int id)
+        public bool Delete(int id)
         {
-            throw new NotImplementedException();
-        }
+            var produto = _context.Produtos.Find(id);
 
+            if(produto is not null)
+            {
+                _context.Produtos.Remove(produto);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }
