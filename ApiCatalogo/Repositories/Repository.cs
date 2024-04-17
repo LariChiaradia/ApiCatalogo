@@ -8,6 +8,11 @@ namespace ApiCatalogo.Repositories
     {
         protected readonly AppDbContext _context;
 
+        public Repository(AppDbContext context)
+        {
+            _context = context;
+        }
+
         public IEnumerable<T> GetAll()
         {
             return _context.Set<T>().ToList();
