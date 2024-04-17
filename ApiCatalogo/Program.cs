@@ -2,6 +2,8 @@ using ApiCatalogo.Context;
 using ApiCatalogo.Extensions;
 using ApiCatalogo.Filters;
 using ApiCatalogo.Logging;
+using ApiCatalogo.Repositories;
+using ApiCatalogo.Repositories.Interface;
 using ApiCatalogo.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,8 +29,9 @@ builder.Services.AddSwaggerGen();
 
 string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 
-var valor1 = builder.Configuration["chave1"];
-var valor2 = builder.Configuration["secao1:chave2"];
+//Teste
+//var valor1 = builder.Configuration["chave1"];
+//var valor2 = builder.Configuration["secao1:chave2"];
 
 builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseMySql(mySqlConnection, 
@@ -41,6 +44,7 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 });
 
 builder.Services.AddScoped<ApiLoggingFilter> ();
+builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 
 builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration
 {

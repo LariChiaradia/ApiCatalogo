@@ -1,6 +1,8 @@
-﻿using ApiCatalogo.Context;
+﻿
 using ApiCatalogo.Filters;
 using ApiCatalogo.Models;
+using ApiCatalogo.Repositories;
+using ApiCatalogo.Repositories.Interface;
 using ApiCatalogo.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,49 +14,24 @@ namespace ApiCatalogo.Controllers
     [ApiController]
     public class CategoriasController : ControllerBase
     {
-        public readonly AppDbContext _context;
-        public readonly IConfiguration _configuration;
-        public readonly ILogger _logger;
+        private readonly ICategoriaRepository _repository;
+        private readonly IConfiguration _configuration;
+        private readonly ILogger _logger;
 
-        public CategoriasController(AppDbContext context, IConfiguration configuration,
+        public CategoriasController(ICategoriaRepository repository, IConfiguration configuration,
             ILogger<CategoriasController> logger)
         {
-            _context = context;
+            _repository = repository;
             _configuration = configuration;
             _logger = logger;
-        }
-
-        [HttpGet("LerArquivoConfiguracao")]
-        public string GetValores()
-        {
-            var valor1 = _configuration["chave1"];
-            var valor2 = _configuration["chave2"];
-            var secao1 = _configuration["secao1:chave2"];
-
-            return $"Chave1 = {valor1} \nChave2 = {valor2} \nSeção1 => Chave2 = {secao1}";
-        }
-
-
-        [HttpGet("UsandoFromServices/{nome}")]
-        public ActionResult<string> GetSaudacaoFromServices([FromServices] IMeuServico meuServico,
-                                                             string nome)
-        {
-            return meuServico.Saudacao(nome);
-        }
-
-        [HttpGet("SemUsarFromServices/{nome}")]
-        public ActionResult<string> GetSaudacaoSemFromServices(IMeuServico meuServico,
-                                                     string nome)
-        {
-            return meuServico.Saudacao(nome);
         }
 
         [HttpGet("produtos")]
         public ActionResult<IEnumerable<Categoria>> GetCategoriasProdutos()
         {
             _logger.LogInformation("========================== GET api/categorias/produtos =======================");
-                var listaProdutos = _context.Categorias.Include(p => p.Produtos).ToList();
-                return listaProdutos;
+                var listaProdutos = _repository.GetCategoriasProdutos();
+                return Ok(listaProdutos);
         }
 
         [HttpGet]
@@ -63,28 +40,22 @@ namespace ApiCatalogo.Controllers
         {
             _logger.LogInformation("========================== GET api/categorias =======================");
 
-                var categorias = _context.Categorias.AsNoTracking().ToList();
-
-                if (categorias is null)
-                {
-                    return NotFound("Categorias não encontradas");
-                }
-
-                return categorias;
+            var categorias = _repository.GetCategorias();
+            return Ok(categorias);
         }
 
         [HttpGet("{id:int}", Name ="ObterCategoria")]
         public ActionResult<Categoria> Get(int id)
         {
 
-                var categoria = _context.Categorias.FirstOrDefault(c => c.CategoriaId == id);
+                var categoria = _repository.GetCategoria(id);
 
                 _logger.LogInformation($"==========================GET api/categorias/id = {id} =======================");
                 
-                if (categoria == null)
+                if (categoria is null)
                 {
-                    _logger.LogInformation($"==========================GET api/categorias/id = {id} NOT FOUND =======================");
-                    return NotFound("Categoria não foi localizada");
+                    _logger.LogWarning($"Categoria com id == {id} não foi localizada.");
+                    return NotFound($"Categoria com o id = {id} não foi localizada.");
                 }
                 return Ok(categoria);
         }
@@ -94,14 +65,13 @@ namespace ApiCatalogo.Controllers
         {
             if (categoria is null)
             {
+                _logger.LogWarning("Dados inválidos.");
                 return BadRequest("Dados inválidos");
             }
 
-            _context.Categorias.Add(categoria);
-            _context.SaveChanges();
+            var categoriaCriada = _repository.Create(categoria);
 
-            return new CreatedAtRouteResult("ObterCategoria",
-                new {id = categoria.CategoriaId}, categoria);
+            return new CreatedAtRouteResult("ObterCategoria", new {id = categoriaCriada.CategoriaId}, categoriaCriada);
         }
 
         [HttpPut("{id:int}")]
@@ -109,10 +79,11 @@ namespace ApiCatalogo.Controllers
         {
             if(id != categoria.CategoriaId)
             {
-                return BadRequest("Dados inválidos");
+                _logger.LogWarning("Dados inválidos.");
+                return BadRequest("Dados inválidos.");
             }
-            _context.Entry(categoria).State = EntityState.Modified;
-            _context.SaveChanges();
+
+            _repository.Update(categoria);
 
             return Ok(categoria);
         }
@@ -120,17 +91,43 @@ namespace ApiCatalogo.Controllers
         [HttpDelete("{id:int}")]
         public ActionResult Delete(int id)
         {
-            var categoria = _context.Categorias.FirstOrDefault(c => c.CategoriaId == id);
+            var categoria = _repository.GetCategoria(id);
 
             if (categoria is null)
             {
-                return NotFound("Categoria com não localizada");
+                _logger.LogWarning($"Categoria com id = {id} não foi localizada.");
+                return NotFound($"Categoria com id = {id} não foi localizada.");
             }
 
-            _context.Remove(categoria);
-            _context.SaveChanges();
+            var categoriaExcluida = _repository.Delete(id);
 
-            return Ok(categoria);
+            return Ok(categoriaExcluida);
         }
+
+        //Teste
+        //[HttpGet("LerArquivoConfiguracao")]
+        //public string GetValores()
+        //{
+        //    var valor1 = _configuration["chave1"];
+        //    var valor2 = _configuration["chave2"];
+        //    var secao1 = _configuration["secao1:chave2"];
+
+        //    return $"Chave1 = {valor1} \nChave2 = {valor2} \nSeção1 => Chave2 = {secao1}";
+        //}
+
+
+        //[HttpGet("UsandoFromServices/{nome}")]
+        //public ActionResult<string> GetSaudacaoFromServices([FromServices] IMeuServico meuServico,
+        //                                                     string nome)
+        //{
+        //    return meuServico.Saudacao(nome);
+        //}
+
+        //[HttpGet("SemUsarFromServices/{nome}")]
+        //public ActionResult<string> GetSaudacaoSemFromServices(IMeuServico meuServico,
+        //                                             string nome)
+        //{
+        //    return meuServico.Saudacao(nome);
+        //}
     }
 }
