@@ -1,5 +1,6 @@
 ﻿
 using ApiCatalogo.DTOs;
+using ApiCatalogo.DTOs.Mappings;
 using ApiCatalogo.Filters;
 using ApiCatalogo.Models;
 using ApiCatalogo.Repositories;
@@ -32,17 +33,7 @@ namespace ApiCatalogo.Controllers
 
             var categorias = _uof.CategoriaRepository.GetAll();
 
-            var categoriasDTO = new List<CategoriaDTO>();
-            foreach (var categoria in categorias)
-            {
-                var categoriaDTO = new CategoriaDTO()
-                {
-                    CategoriaId = categoria.CategoriaId,
-                    Nome = categoria.Nome,
-                    ImagemUrl = categoria.ImagemUrl
-                };
-                categoriasDTO.Add(categoriaDTO);
-            }
+            var categoriasDTO = categorias.ToCategoriaDTOList();
 
             return Ok(categoriasDTO);
         }
@@ -61,12 +52,7 @@ namespace ApiCatalogo.Controllers
                     return NotFound($"Categoria com o id = {id} não foi localizada.");
                 }
 
-            var categoriaDTO = new CategoriaDTO()
-            {
-                CategoriaId = categoria.CategoriaId,
-                Nome = categoria.Nome,
-                ImagemUrl = categoria.ImagemUrl
-            };
+                var categoriaDTO = categoria.ToCategoriaDTO();
 
                 return Ok(categoriaDTO);
         }
@@ -80,22 +66,12 @@ namespace ApiCatalogo.Controllers
                 return BadRequest("Dados inválidos");
             }
 
-            var categoria = new Categoria()
-            {
-                CategoriaId = categoriaDTO.CategoriaId,
-                Nome = categoriaDTO.Nome,
-                ImagemUrl = categoriaDTO.ImagemUrl
-            };
+            var categoria = categoriaDTO.ToCategoria();
 
             var categoriaCriada = _uof.CategoriaRepository.Create(categoria);
             _uof.Commit();
 
-            var novaCategoriaDTO = new CategoriaDTO()
-            {
-                CategoriaId = categoria.CategoriaId,
-                Nome = categoria.Nome,
-                ImagemUrl = categoria.ImagemUrl
-            };
+            var novaCategoriaDTO = categoria.ToCategoriaDTO();
 
             return new CreatedAtRouteResult("ObterCategoria", new {id = novaCategoriaDTO.CategoriaId}, novaCategoriaDTO);
         }
@@ -109,24 +85,14 @@ namespace ApiCatalogo.Controllers
                 return BadRequest("Dados inválidos.");
             }
 
-            var categoria = new Categoria()
-            {
-                CategoriaId = categoriaDTO.CategoriaId,
-                Nome = categoriaDTO.Nome,
-                ImagemUrl = categoriaDTO.ImagemUrl
-            };
+            var categoria = categoriaDTO.ToCategoria();
 
             _uof.CategoriaRepository.Update(categoria);
             _uof.Commit();
 
-            var atulizadaCategoriaDTO = new CategoriaDTO()
-            {
-                CategoriaId = categoria.CategoriaId,
-                Nome = categoria.Nome,
-                ImagemUrl = categoria.ImagemUrl
-            };
+            var atualizadaCategoriaDTO = categoria.ToCategoriaDTO();
 
-            return Ok(atulizadaCategoriaDTO);
+            return Ok(atualizadaCategoriaDTO);
         }
 
         [HttpDelete("{id:int}")]
@@ -143,12 +109,7 @@ namespace ApiCatalogo.Controllers
             var categoriaExcluida = _uof.CategoriaRepository.Delete(categoria);
             _uof.Commit();
 
-            var categoriaExcluidaDTO = new CategoriaDTO()
-            {
-                CategoriaId = categoria.CategoriaId,
-                Nome = categoria.Nome,
-                ImagemUrl = categoria.ImagemUrl
-            };
+            var categoriaExcluidaDTO = categoria.ToCategoriaDTO();
 
             return Ok(categoriaExcluidaDTO);
         }
