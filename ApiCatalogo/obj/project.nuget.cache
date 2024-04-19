@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ZKFFzN0bi3nSDmJiBdYjKNisCp0M0tSUA2c7UIS/BU2E2ELkQlIL7llSbI0sAU2pq5i0gpkALGz0q6inlUT3aw==",
+  "dgSpecHash": "dKnTURE3DeOo3W1yt9VhP7aamZFHKKvcn7ZkVEv5LIeXLcGVsKvl7FcSFiijgODnfIMkC9Q5EEaKUHoLrBR3nw==",
   "success": true,
   "projectFilePath": "C:\\Users\\larissa.silva\\Documents\\repos\\ApiCatalogo\\ApiCatalogo\\ApiCatalogo.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\larissa.silva\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\larissa.silva\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\larissa.silva\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\larissa.silva\\.nuget\\packages\\humanizer.core.af\\2.14.1\\humanizer.core.af.2.14.1.nupkg.sha512",
