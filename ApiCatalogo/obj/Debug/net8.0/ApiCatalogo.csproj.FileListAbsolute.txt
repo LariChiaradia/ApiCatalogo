@@ -462,3 +462,7 @@ C:\Repos\C#\ApiCatalogo\ApiCatalogo\obj\Debug\net8.0\refint\ApiCatalogo.dll
 C:\Repos\C#\ApiCatalogo\ApiCatalogo\obj\Debug\net8.0\ApiCatalogo.pdb
 C:\Repos\C#\ApiCatalogo\ApiCatalogo\obj\Debug\net8.0\ApiCatalogo.genruntimeconfig.cache
 C:\Repos\C#\ApiCatalogo\ApiCatalogo\obj\Debug\net8.0\ref\ApiCatalogo.dll
+C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
