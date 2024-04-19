@@ -104,7 +104,7 @@ namespace ApiCatalogo.Controllers
 
             patchProdutoDTO.ApplyTo(produtoUpdateRequest,ModelState);
 
-            if (!ModelState.IsValid || TryValidateModel(produtoUpdateRequest))
+            if (!ModelState.IsValid || !TryValidateModel(produtoUpdateRequest))
             {
                 return BadRequest(ModelState);
             }

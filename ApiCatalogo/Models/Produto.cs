@@ -27,7 +27,6 @@ namespace ApiCatalogo.Models
         [Required]
         [StringLength(300)]
         public string? ImageUrl { get; set; }
-
         public float Estoque { get; set; }
         public DateTime DataCadastro { get; set; }
 
