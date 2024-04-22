@@ -510,3 +510,47 @@ SELECT `p`.`ProdutoId`, `p`.`CategoriaId`, `p`.`DataCadastro`, `p`.`Descricao`, 
 FROM `Produtos` AS `p`
 WHERE `p`.`ProdutoId` = @__id_0
 LIMIT 1
+Information : 14 - Now listening on: https://localhost:7165
+Information : 14 - Now listening on: http://localhost:5128
+Information : 0 - Application started. Press Ctrl+C to shut down.
+Information : 0 - Hosting environment: Development
+Information : 0 - Content root path: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo
+Information : 20101 - Executed DbCommand (26ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?' (Size = 300), @p3='?' (DbType = Single), @p4='?' (Size = 300), @p5='?' (Size = 80), @p6='?' (DbType = Decimal)], CommandType='Text', CommandTimeout='30']
+INSERT INTO `Produtos` (`CategoriaId`, `DataCadastro`, `Descricao`, `Estoque`, `ImageUrl`, `Nome`, `Preco`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+SELECT `ProdutoId`
+FROM `Produtos`
+WHERE ROW_COUNT() = 1 AND `ProdutoId` = LAST_INSERT_ID();
+Information : 20101 - Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?' (Size = 300), @p3='?' (DbType = Single), @p4='?' (Size = 300), @p5='?' (Size = 80), @p6='?' (DbType = Decimal)], CommandType='Text', CommandTimeout='30']
+INSERT INTO `Produtos` (`CategoriaId`, `DataCadastro`, `Descricao`, `Estoque`, `ImageUrl`, `Nome`, `Preco`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+SELECT `ProdutoId`
+FROM `Produtos`
+WHERE ROW_COUNT() = 1 AND `ProdutoId` = LAST_INSERT_ID();
+Information : 20101 - Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?' (Size = 300), @p3='?' (DbType = Single), @p4='?' (Size = 300), @p5='?' (Size = 80), @p6='?' (DbType = Decimal)], CommandType='Text', CommandTimeout='30']
+INSERT INTO `Produtos` (`CategoriaId`, `DataCadastro`, `Descricao`, `Estoque`, `ImageUrl`, `Nome`, `Preco`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+SELECT `ProdutoId`
+FROM `Produtos`
+WHERE ROW_COUNT() = 1 AND `ProdutoId` = LAST_INSERT_ID();
+Information : 20101 - Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?' (Size = 300), @p3='?' (DbType = Single), @p4='?' (Size = 300), @p5='?' (Size = 80), @p6='?' (DbType = Decimal)], CommandType='Text', CommandTimeout='30']
+INSERT INTO `Produtos` (`CategoriaId`, `DataCadastro`, `Descricao`, `Estoque`, `ImageUrl`, `Nome`, `Preco`)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+SELECT `ProdutoId`
+FROM `Produtos`
+WHERE ROW_COUNT() = 1 AND `ProdutoId` = LAST_INSERT_ID();
+Information : 20101 - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProdutoId`, `p`.`CategoriaId`, `p`.`DataCadastro`, `p`.`Descricao`, `p`.`Estoque`, `p`.`ImageUrl`, `p`.`Nome`, `p`.`Preco`
+FROM `Produtos` AS `p`
+Information : 20101 - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProdutoId`, `p`.`CategoriaId`, `p`.`DataCadastro`, `p`.`Descricao`, `p`.`Estoque`, `p`.`ImageUrl`, `p`.`Nome`, `p`.`Preco`
+FROM `Produtos` AS `p`
+Information : 20101 - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProdutoId`, `p`.`CategoriaId`, `p`.`DataCadastro`, `p`.`Descricao`, `p`.`Estoque`, `p`.`ImageUrl`, `p`.`Nome`, `p`.`Preco`
+FROM `Produtos` AS `p`
+Information : 20101 - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProdutoId`, `p`.`CategoriaId`, `p`.`DataCadastro`, `p`.`Descricao`, `p`.`Estoque`, `p`.`ImageUrl`, `p`.`Nome`, `p`.`Preco`
+FROM `Produtos` AS `p`
+Information : 20101 - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `p`.`ProdutoId`, `p`.`CategoriaId`, `p`.`DataCadastro`, `p`.`Descricao`, `p`.`Estoque`, `p`.`ImageUrl`, `p`.`Nome`, `p`.`Preco`
+FROM `Produtos` AS `p`
