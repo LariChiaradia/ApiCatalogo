@@ -43,7 +43,11 @@ namespace ApiCatalogo.Controllers
         public ActionResult<IEnumerable<ProdutoDTO>> Get([FromQuery] ProdutosParameters produtosParameters)
         {
             var produtos = _uof.ProdutoRepository.GetProdutos(produtosParameters);
+            return ObterProdutos(produtos);
+        }
 
+        private ActionResult<IEnumerable<ProdutoDTO>> ObterProdutos(PagedList<Produto> produtos)
+        {
             var metadata = new
             {
                 produtos.TotalCount,
@@ -57,8 +61,14 @@ namespace ApiCatalogo.Controllers
             Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metadata));
 
             var produtosDTO = _mapper.Map<IEnumerable<ProdutoDTO>>(produtos);
-
             return Ok(produtosDTO);
+        }
+
+        [HttpGet("filter/preco/paginaton")]
+        public ActionResult<IEnumerable<ProdutoDTO>> GetProdutosFilterPreco([FromQuery] ProdutosFiltroPreco produtosFiltroParameters)
+        {
+            var produtos = _uof.ProdutoRepository.GetProdutosFiltroPreco(produtosFiltroParameters);
+            return ObterProdutos(produtos);
         }
 
         [HttpGet]
