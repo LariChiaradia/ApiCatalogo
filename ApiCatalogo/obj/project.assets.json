@@ -7120,24 +7120,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\laris\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\larissa.silva\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Repos\\C#\\ApiCatalogo\\ApiCatalogo\\ApiCatalogo.csproj",
+      "projectUniqueName": "C:\\Users\\larissa.silva\\Documents\\repos\\ApiCatalogo\\ApiCatalogo\\ApiCatalogo.csproj",
       "projectName": "ApiCatalogo",
-      "projectPath": "C:\\Repos\\C#\\ApiCatalogo\\ApiCatalogo\\ApiCatalogo.csproj",
-      "packagesPath": "C:\\Users\\laris\\.nuget\\packages\\",
-      "outputPath": "C:\\Repos\\C#\\ApiCatalogo\\ApiCatalogo\\obj\\",
+      "projectPath": "C:\\Users\\larissa.silva\\Documents\\repos\\ApiCatalogo\\ApiCatalogo\\ApiCatalogo.csproj",
+      "packagesPath": "C:\\Users\\larissa.silva\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\larissa.silva\\Documents\\repos\\ApiCatalogo\\ApiCatalogo\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\laris\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\larissa.silva\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7228,7 +7223,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

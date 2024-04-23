@@ -14,23 +14,24 @@ namespace ApiCatalogo.Repositories
         {
         }
 
-        public PagedList<Categoria> GetCategorias(CategoriasParameters categoriasParameters)
+        public async Task<PagedList<Categoria>> GetCategoriasAsync(CategoriasParameters categoriasParameters)
         {
-            var categorias = GetAll().OrderBy(c => c.CategoriaId).AsQueryable();
-            var categoriasOrdenadas = PagedList<Categoria>.ToPagedList(categorias, categoriasParameters.PageNumber, categoriasParameters.PageSize);
+            var categorias = await GetAllAsync();
+            var categoriasOrdenadas = categorias.OrderBy(c => c.CategoriaId).AsQueryable();
+            var resultado = PagedList<Categoria>.ToPagedList(categoriasOrdenadas, categoriasParameters.PageNumber, categoriasParameters.PageSize);
 
-            return categoriasOrdenadas;
+            return resultado;
         }
 
-        public PagedList<Categoria> GetCategoriasFiltroNome(CategoriasFiltroNome categoriasparams)
+        public async Task<PagedList<Categoria>> GetCategoriasFiltroNomeAsync(CategoriasFiltroNome categoriasparams)
         {
-            var categorias = GetAll().AsQueryable();
+            var categorias = await GetAllAsync();
             if (!string.IsNullOrEmpty(categoriasparams.Nome))
             {
                 categorias = categorias.Where(c => c.Nome.Contains(categoriasparams.Nome));
             }
 
-            var categoriasFiltradas = PagedList<Categoria>.ToPagedList(categorias, categoriasparams.PageNumber, categoriasparams.PageSize);
+            var categoriasFiltradas = PagedList<Categoria>.ToPagedList(categorias.AsQueryable(), categoriasparams.PageNumber, categoriasparams.PageSize);
 
             return categoriasFiltradas;
         }
