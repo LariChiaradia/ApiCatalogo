@@ -1,8 +1,11 @@
-﻿using ApiCatalogo.Models;
+﻿using ApiCatalogo.DTOs;
+using ApiCatalogo.Models;
 using ApiCatalogo.Services.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace ApiCatalogo.Controllers;
 
@@ -26,5 +29,45 @@ public class AuthController : ControllerBase
         _configuration = configuration;
     }
 
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginModelDTO loginModel)
+    {
+        var user = await _userManager.FindByNameAsync(loginModel.UserName!);
+        if (user is not null && await _userManager.CheckPasswordAsync(user, loginModel.Password!))
+        {
+            var userRoles = await _userManager.GetRolesAsync(user);
+            //Informações do usuário para o token de autenticação
+            var authClaims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.UserName!),
+                new Claim(ClaimTypes.Email, user.Email!),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            };
+
+            foreach (var userRole in userRoles)
+            {
+                authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+            }
+            //Gerar o token
+            var token = _tokenService.GenerateAcessToken(authClaims, _configuration);
+            //Gerar token de atualização
+            var refreshToken = _tokenService.GenerateRefreshToken();
+            //Converter de string para int
+            _ = int.TryParse(_configuration["JWT:RefreshTokenValidityInMinutes"],
+                                            out int refreshTokenValidityInMinutes);
+            user.RefreshToken = refreshToken;
+
+            user.RefreshTokenExpiryTime = DateTime.Now.AddMinutes(refreshTokenValidityInMinutes);
+            await _userManager.UpdateAsync(user);
+
+            return Ok(new
+            {
+                Token = new JwtSecurityTokenHandler().WriteToken(token),
+                RefreshToken = refreshToken,
+                Expiration = token.ValidTo
+            });
+        }
+        return Unauthorized();
+    }
 
 }
