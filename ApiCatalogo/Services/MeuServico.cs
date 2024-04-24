@@ -1,4 +1,6 @@
-﻿namespace ApiCatalogo.Services
+﻿using ApiCatalogo.Services.Interface;
+
+namespace ApiCatalogo.Services
 {
     public class MeuServico : IMeuServico
     {
