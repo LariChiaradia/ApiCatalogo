@@ -4,6 +4,7 @@ using ApiCatalogo.Services.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -29,7 +30,8 @@ public class AuthController : ControllerBase
         _configuration = configuration;
     }
 
-    [HttpPost("login")]
+    [HttpPost]
+    [Route("login")]
     public async Task<IActionResult> Login([FromBody] LoginModelDTO loginModel)
     {
         var user = await _userManager.FindByNameAsync(loginModel.UserName!);
@@ -68,6 +70,33 @@ public class AuthController : ControllerBase
             });
         }
         return Unauthorized();
+    }
+
+    [HttpPost]
+    [Route("register")]
+    public async Task<IActionResult> Register([FromBody] RegisterModelDTO registerModel)
+    {
+        var userExists = await _userManager.FindByNameAsync(registerModel.UserName!);
+
+        if (userExists != null)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                    new ResponseDTO { Status = "Error", Message = "User already exists!" });
+        }
+        ApplicationUser user = new()
+        {
+            Email = registerModel.Email,
+            SecurityStamp = Guid.NewGuid().ToString(),
+            UserName = registerModel.UserName
+        };
+        var result = await _userManager.CreateAsync(user, registerModel.Password!);
+
+        if (!result.Succeeded)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                   new ResponseDTO { Status = "Error", Message = "User creation failed." });
+        }
+        return Ok(new ResponseDTO { Status = "Sucess", Message = "User created sucessfully" });
     }
 
 }
