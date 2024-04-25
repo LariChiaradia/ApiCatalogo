@@ -1045,3 +1045,23 @@ Information : 0 - ### Executando -> OnActionExecuting
 Information : 0 - #########################################################
 Information : 0 - 11:53:11
 Information : 0 - ModelState : True
+Information : 14 - Now listening on: https://localhost:7165
+Information : 14 - Now listening on: http://localhost:5128
+Information : 0 - Application started. Press Ctrl+C to shut down.
+Information : 0 - Hosting environment: Development
+Information : 0 - Content root path: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo
+Information : 20101 - Executed DbCommand (33ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+Information : 20101 - Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SELECT `a`.`Id`, `a`.`ConcurrencyStamp`, `a`.`Name`, `a`.`NormalizedName`
+FROM `AspNetRoles` AS `a`
+WHERE `a`.`NormalizedName` = @__normalizedName_0
+LIMIT 1
+Information : 20101 - Executed DbCommand (4ms) [Parameters=[@p0='?' (Size = 255), @p1='?' (Size = 4000), @p2='?' (Size = 256), @p3='?' (Size = 256)], CommandType='Text', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+INSERT INTO `AspNetRoles` (`Id`, `ConcurrencyStamp`, `Name`, `NormalizedName`)
+VALUES (@p0, @p1, @p2, @p3);
+Information : 1 - Roles Added

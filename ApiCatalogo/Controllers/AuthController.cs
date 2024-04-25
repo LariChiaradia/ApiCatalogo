@@ -19,16 +19,45 @@ public class AuthController : ControllerBase
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly IConfiguration _configuration;
+    private readonly ILogger<AuthController> _logger;
 
     public AuthController(ITokenService tokenService,
                           UserManager<ApplicationUser> userManager,
                           RoleManager<IdentityRole> roleManager,
-                          IConfiguration configuration)
+                          IConfiguration configuration,
+                          ILogger<AuthController> logger)
     {
         _tokenService = tokenService;
         _userManager = userManager;
         _roleManager = roleManager;
         _configuration = configuration;
+        _logger = logger;
+    }
+
+    [HttpPost]
+    [Route("CreateRole")]
+    public async Task<IActionResult> CreateRole(string roleName)
+    {
+        var roleExist = await _roleManager.RoleExistsAsync(roleName);
+        if (!roleExist)
+        {
+            var roleResult = await _roleManager.CreateAsync(new IdentityRole(roleName));
+
+            if (roleResult.Succeeded)
+            {
+                _logger.LogInformation(1, "Roles Added");
+                return StatusCode(StatusCodes.Status200OK,
+                                  new ResponseDTO { Status = "Success", Message = $"Role {roleName} added successfully" });
+            }
+            else
+            {
+                _logger.LogInformation(2, "Error");
+                return StatusCode(StatusCodes.Status400BadRequest,
+                                  new ResponseDTO { Status = "Error", Message = $"Issue adding the new {roleName} role" });
+            }
+        }
+        return StatusCode(StatusCodes.Status400BadRequest,
+                          new ResponseDTO { Status = "Error", Message = "Role already exist." });
     }
 
     [HttpPost]
