@@ -795,3 +795,24 @@ ALTER TABLE `AspNetUsers` ADD `RefreshTokenExpiryTime` datetime(6) NOT NULL DEFA
 Information : 20101 - Executed DbCommand (8ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
 VALUES ('20240424122022_AjusteApplicationUser', '8.0.4');
+Critical : 6 - Application startup exception
+Error : 11 - Hosting failed to start
+Critical : 6 - Application startup exception
+Error : 11 - Hosting failed to start
+Critical : 6 - Application startup exception
+Error : 11 - Hosting failed to start
+Information : 14 - Now listening on: https://localhost:7165
+Information : 14 - Now listening on: http://localhost:5128
+Information : 0 - Application started. Press Ctrl+C to shut down.
+Information : 0 - Hosting environment: Development
+Information : 0 - Content root path: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo
+Information : 14 - Now listening on: https://localhost:7165
+Information : 14 - Now listening on: http://localhost:5128
+Information : 0 - Application started. Press Ctrl+C to shut down.
+Information : 0 - Hosting environment: Development
+Information : 0 - Content root path: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo
+Information : 14 - Now listening on: https://localhost:7165
+Information : 14 - Now listening on: http://localhost:5128
+Information : 0 - Application started. Press Ctrl+C to shut down.
+Information : 0 - Hosting environment: Development
+Information : 0 - Content root path: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo
