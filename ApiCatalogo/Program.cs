@@ -31,6 +31,15 @@ builder.Services.AddControllers(options =>
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 }).AddNewtonsoftJson();
 
+var OrigensComAcessoPermitido = "_origensComAcessoPermitido";
+
+builder.Services.AddCors(options =>
+    options.AddPolicy(name: OrigensComAcessoPermitido,
+    policy =>
+    {
+        policy.WithOrigins("http://www.apirequest.io");
+    })
+);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -76,7 +85,7 @@ string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConne
 //var valor2 = builder.Configuration["secao1:chave2"];
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseMySql(mySqlConnection, 
+                options.UseMySql(mySqlConnection,
                 ServerVersion.AutoDetect(mySqlConnection)));
 
 builder.Services.AddTransient<IMeuServico, MeuServico>();
@@ -115,13 +124,13 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
     options.AddPolicy("ExclusivePolicyOnly", policy =>
     {
-        policy.RequireAssertion(context => context.User.HasClaim(Claim => 
-                        Claim.Type == "id" && Claim.Value == "larissa") 
+        policy.RequireAssertion(context => context.User.HasClaim(Claim =>
+                        Claim.Type == "id" && Claim.Value == "larissa")
                         || context.User.IsInRole("SuperAdmin"));
     });
 });
 
-builder.Services.AddScoped<ApiLoggingFilter> ();
+builder.Services.AddScoped<ApiLoggingFilter>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -146,6 +155,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+
+app.UseCors(OrigensComAcessoPermitido);
 
 app.UseAuthorization();
 
