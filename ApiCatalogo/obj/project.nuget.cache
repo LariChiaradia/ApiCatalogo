@@ -1,9 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "5jL8wbUZFh38jfs4muJ9hnjPTLQEeJbnGWuoly3wIVWELw6f/InN/GpwPnnYnmYPNxOF/V+WilVjgFO7q0c+rQ==",
+  "dgSpecHash": "IbEE6/VvTfwg0WElPKGZEfRFHDraedEPFjiHtTyiOEqs7p2vNlUzIf+zGH3YJEHOfifdGHTT1eMeJGRO/Pn1dg==",
   "success": true,
   "projectFilePath": "C:\\Users\\larissa.silva\\Documents\\repos\\ApiCatalogo\\ApiCatalogo\\ApiCatalogo.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\larissa.silva\\.nuget\\packages\\asp.versioning.abstractions\\8.1.0\\asp.versioning.abstractions.8.1.0.nupkg.sha512",
+    "C:\\Users\\larissa.silva\\.nuget\\packages\\asp.versioning.http\\8.1.0\\asp.versioning.http.8.1.0.nupkg.sha512",
+    "C:\\Users\\larissa.silva\\.nuget\\packages\\asp.versioning.mvc\\8.1.0\\asp.versioning.mvc.8.1.0.nupkg.sha512",
+    "C:\\Users\\larissa.silva\\.nuget\\packages\\asp.versioning.mvc.apiexplorer\\8.1.0\\asp.versioning.mvc.apiexplorer.8.1.0.nupkg.sha512",
     "C:\\Users\\larissa.silva\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\larissa.silva\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\larissa.silva\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
