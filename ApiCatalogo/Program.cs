@@ -9,6 +9,7 @@ using ApiCatalogo.Repositories;
 using ApiCatalogo.Repositories.Interface;
 using ApiCatalogo.Services;
 using ApiCatalogo.Services.Interface;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -166,6 +167,20 @@ builder.Services.AddRateLimiter(options =>
                                 QueueLimit = 0,
                                 Window = TimeSpan.FromSeconds(10)
                             }));
+});
+
+builder.Services.AddApiVersioning(o =>
+{
+    o.DefaultApiVersion = new ApiVersion(1, 0);
+    o.AssumeDefaultVersionWhenUnspecified = true;
+    o.ReportApiVersions = true;
+    o.ApiVersionReader = ApiVersionReader.Combine(
+                         new QueryStringApiVersionReader(),
+                         new UrlSegmentApiVersionReader());
+}).AddApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
 });
 
 builder.Services.AddScoped<ApiLoggingFilter>();
