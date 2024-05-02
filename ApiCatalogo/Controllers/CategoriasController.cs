@@ -18,10 +18,11 @@ using X.PagedList;
 
 namespace ApiCatalogo.Controllers
 {
-    [EnableCors("OrigensComAcessoPermitido")]
-    //[EnableRateLimiting("fixedwindow")]
-    [Route("[controller]")]
     [ApiController]
+    [Route("[controller]")]
+    [EnableCors("OrigensComAcessoPermitido")]
+    [EnableRateLimiting("fixedwindow")]
+    [Produces("application/json")]
     public class CategoriasController : ControllerBase
     {
         private readonly IUnitOfWork _uof;
