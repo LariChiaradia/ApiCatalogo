@@ -36,9 +36,17 @@ namespace ApiCatalogo.Controllers
         }
 
         [HttpGet("pagination")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<IEnumerable<CategoriaDTO>>> Get([FromQuery] CategoriasParameters categoriasParameters)
         {
             var categorias = await _uof.CategoriaRepository.GetCategoriasAsync(categoriasParameters);
+            
+            if(categorias is null)
+            {
+                return NotFound("Não existem categorias...");
+            }
 
             return ObterCategorias(categorias);
         }
@@ -147,7 +155,9 @@ namespace ApiCatalogo.Controllers
         }
 
         [HttpPut("{id:int}")]
-        [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Put))]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<CategoriaDTO>> Put(int id, CategoriaDTO categoriaDTO)
         {
             if(id != categoriaDTO.CategoriaId)
