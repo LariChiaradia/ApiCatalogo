@@ -23,6 +23,7 @@ namespace ApiCatalogo.Controllers
     [EnableCors("OrigensComAcessoPermitido")]
     [EnableRateLimiting("fixedwindow")]
     [Produces("application/json")]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     public class CategoriasController : ControllerBase
     {
         private readonly IUnitOfWork _uof;
@@ -146,6 +147,7 @@ namespace ApiCatalogo.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Put))]
         public async Task<ActionResult<CategoriaDTO>> Put(int id, CategoriaDTO categoriaDTO)
         {
             if(id != categoriaDTO.CategoriaId)
