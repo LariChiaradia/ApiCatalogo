@@ -73,6 +73,10 @@ namespace ApiCatalogo.Controllers
             return ObterProdutos(produtos);
         }
 
+        /// <summary>
+        /// Exibe uma relação dos produtos
+        /// </summary>
+        /// <returns>Retorna uma lista de objetos Produto</returns>
         [Authorize(Policy ="UserOnly")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProdutoDTO>>> Get()
@@ -88,6 +92,11 @@ namespace ApiCatalogo.Controllers
             return Ok(produtosDTO);
         }
 
+        /// <summary>
+        /// Obtem o produto pelo seu identificador produtoId
+        /// </summary>
+        /// <param name="id">Código do produto</param>
+        /// <returns>Um objeto Produto</returns>
         [HttpGet("{id:int}", Name="ObterProduto")]
         public async Task<ActionResult<ProdutoDTO>> Get(int id)
         {

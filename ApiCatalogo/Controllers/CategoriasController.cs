@@ -18,10 +18,12 @@ using X.PagedList;
 
 namespace ApiCatalogo.Controllers
 {
-    [EnableCors("OrigensComAcessoPermitido")]
-    //[EnableRateLimiting("fixedwindow")]
-    [Route("[controller]")]
     [ApiController]
+    [Route("[controller]")]
+    [EnableCors("OrigensComAcessoPermitido")]
+    [EnableRateLimiting("fixedwindow")]
+    [Produces("application/json")]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     public class CategoriasController : ControllerBase
     {
         private readonly IUnitOfWork _uof;
@@ -34,9 +36,17 @@ namespace ApiCatalogo.Controllers
         }
 
         [HttpGet("pagination")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<IEnumerable<CategoriaDTO>>> Get([FromQuery] CategoriasParameters categoriasParameters)
         {
             var categorias = await _uof.CategoriaRepository.GetCategoriasAsync(categoriasParameters);
+            
+            if(categorias is null)
+            {
+                return NotFound("Não existem categorias...");
+            }
 
             return ObterCategorias(categorias);
         }
@@ -66,6 +76,10 @@ namespace ApiCatalogo.Controllers
             return ObterCategorias(categoriasFiltradas);
         }
 
+        /// <summary>
+        /// Obtem uma lista de objetos Categoria
+        /// </summary>
+        /// <returns>Uma lista de objetos Categoria</returns>
         [HttpGet]
         //[Authorize]
         [DisableRateLimiting]
@@ -81,7 +95,12 @@ namespace ApiCatalogo.Controllers
             return Ok(categoriasDTO);
         }
 
-        [DisableCors]
+        /// <summary>
+        /// Obtem uma Categoria pelo seu Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Objetos Categoria</returns>
+        //[DisableCors]
         [HttpGet("{id:int}", Name ="ObterCategoria")]
         public async Task<ActionResult<CategoriaDTO>> Get(int id)
         {
@@ -101,6 +120,21 @@ namespace ApiCatalogo.Controllers
                 return Ok(categoriaDTO);
         }
 
+        /// <summary>
+        /// Inclui uma nova categoria
+        /// </summary>
+        /// <remarks>
+        /// Exemplo de request:
+        ///     POST api/categorias
+        ///     {
+        ///         "categoriaId": 1,
+        ///         "nome": "categoria1",
+        ///         "imageUrl": "http://teste.net/1.jpg"
+        ///     }
+        /// </remarks>
+        /// <param name="categoriaDTO">objeto Categoria</param>
+        /// <returns>O objeto Categoria incluida</returns>
+        /// <remarks>Retorna um objeto Categoria incluído</remarks>
         [HttpPost]
         public async Task<ActionResult<CategoriaDTO>> Post(CategoriaDTO categoriaDTO)
         {
@@ -121,6 +155,9 @@ namespace ApiCatalogo.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<CategoriaDTO>> Put(int id, CategoriaDTO categoriaDTO)
         {
             if(id != categoriaDTO.CategoriaId)

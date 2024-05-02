@@ -490,3 +490,5 @@ C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\bin\Debug\net8.0\
 C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\bin\Debug\net8.0\Asp.Versioning.Http.dll
 C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\bin\Debug\net8.0\Asp.Versioning.Mvc.dll
 C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\bin\Debug\net8.0\Asp.Versioning.Mvc.ApiExplorer.dll
+C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\bin\Debug\net8.0\ApiCatalogo.xml
+C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\obj\Debug\net8.0\ApiCatalogo.xml
