@@ -2373,3 +2373,113 @@ Information : 14 - Now listening on: http://localhost:5128
 Information : 0 - Application started. Press Ctrl+C to shut down.
 Information : 0 - Hosting environment: Development
 Information : 0 - Content root path: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo
+Warning : 16 - The WebRootPath was not found: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\wwwroot. Static files may be unavailable.
+Information : 14 - Now listening on: https://localhost:7165
+Information : 14 - Now listening on: http://localhost:5128
+Information : 0 - Application started. Press Ctrl+C to shut down.
+Information : 0 - Hosting environment: Production
+Information : 0 - Content root path: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo
+Warning : 16 - The WebRootPath was not found: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\wwwroot. Static files may be unavailable.
+Information : 14 - Now listening on: https://localhost:7165
+Information : 14 - Now listening on: http://localhost:5128
+Information : 0 - Application started. Press Ctrl+C to shut down.
+Information : 0 - Hosting environment: Production
+Information : 0 - Content root path: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo
+Warning : 16 - The WebRootPath was not found: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\wwwroot. Static files may be unavailable.
+Information : 14 - Now listening on: https://localhost:7165
+Information : 14 - Now listening on: http://localhost:5128
+Information : 0 - Application started. Press Ctrl+C to shut down.
+Information : 0 - Hosting environment: Development
+Information : 0 - Content root path: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo
+Warning : 16 - The WebRootPath was not found: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\wwwroot. Static files may be unavailable.
+Information : 14 - Now listening on: https://localhost:7165
+Information : 14 - Now listening on: http://localhost:5128
+Information : 0 - Application started. Press Ctrl+C to shut down.
+Information : 0 - Hosting environment: Development
+Information : 0 - Content root path: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo
+Information : 0 - ### Executando -> OnActionExecuted
+Information : 0 - #########################################################
+Information : 0 - 11:29:50
+Information : 0 - Status Code : 200
+Information : 0 - #########################################################
+Information : 0 - ========================== GET api/categorias =======================
+Information : 20101 - Executed DbCommand (14ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoriaId`, `c`.`ImagemUrl`, `c`.`Nome`
+FROM `Categorias` AS `c`
+Information : 0 - ### Executando -> OnActionExecuting
+Information : 0 - #########################################################
+Information : 0 - 11:29:51
+Information : 0 - ModelState : True
+Warning : 16 - The WebRootPath was not found: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\bin\Release\net8.0\publish\wwwroot. Static files may be unavailable.
+Information : 0 - Application started. Press Ctrl+C to shut down.
+Information : 0 - Hosting environment: Production
+Information : 0 - Content root path: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\bin\Release\net8.0\publish
+Warning : 3 - Failed to determine the https port for redirect.
+Information : 0 - ### Executando -> OnActionExecuted
+Information : 0 - #########################################################
+Information : 0 - 11:51:41
+Information : 0 - Status Code : 200
+Information : 0 - #########################################################
+Information : 0 - ========================== GET api/categorias =======================
+Information : 20101 - Executed DbCommand (10ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoriaId`, `c`.`ImagemUrl`, `c`.`Nome`
+FROM `Categorias` AS `c`
+Information : 0 - ### Executando -> OnActionExecuting
+Information : 0 - #########################################################
+Information : 0 - 11:51:41
+Information : 0 - ModelState : True
+Warning : 16 - The WebRootPath was not found: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\wwwroot. Static files may be unavailable.
+Information : 14 - Now listening on: https://localhost:7165
+Information : 14 - Now listening on: http://localhost:5128
+Information : 0 - Application started. Press Ctrl+C to shut down.
+Information : 0 - Hosting environment: Production
+Information : 0 - Content root path: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo
+Warning : 16 - The WebRootPath was not found: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo\wwwroot. Static files may be unavailable.
+Information : 14 - Now listening on: https://localhost:7165
+Information : 14 - Now listening on: http://localhost:5128
+Information : 0 - Application started. Press Ctrl+C to shut down.
+Information : 0 - Hosting environment: Development
+Information : 0 - Content root path: C:\Users\larissa.silva\Documents\repos\ApiCatalogo\ApiCatalogo
+Information : 0 - ### Executando -> OnActionExecuted
+Information : 0 - #########################################################
+Information : 0 - 12:06:31
+Information : 0 - Status Code : 200
+Information : 0 - #########################################################
+Information : 0 - ========================== GET api/categorias =======================
+Information : 20101 - Executed DbCommand (15ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoriaId`, `c`.`ImagemUrl`, `c`.`Nome`
+FROM `Categorias` AS `c`
+Information : 0 - ### Executando -> OnActionExecuting
+Information : 0 - #########################################################
+Information : 0 - 12:06:32
+Information : 0 - ModelState : True
+Information : 20101 - Executed DbCommand (20ms) [Parameters=[@p0='?' (Size = 300), @p1='?' (Size = 80)], CommandType='Text', CommandTimeout='30']
+INSERT INTO `Categorias` (`ImagemUrl`, `Nome`)
+VALUES (@p0, @p1);
+SELECT `CategoriaId`
+FROM `Categorias`
+WHERE ROW_COUNT() = 1 AND `CategoriaId` = LAST_INSERT_ID();
+Information : 0 - ### Executando -> OnActionExecuted
+Information : 0 - #########################################################
+Information : 0 - 12:07:12
+Information : 0 - Status Code : 200
+Information : 0 - #########################################################
+Information : 0 - ========================== GET api/categorias =======================
+Information : 20101 - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoriaId`, `c`.`ImagemUrl`, `c`.`Nome`
+FROM `Categorias` AS `c`
+Information : 0 - ### Executando -> OnActionExecuting
+Information : 0 - #########################################################
+Information : 0 - 12:07:12
+Information : 0 - ModelState : True
+Information : 20101 - Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT `c`.`CategoriaId`, `c`.`ImagemUrl`, `c`.`Nome`
+FROM `Categorias` AS `c`
+WHERE `c`.`CategoriaId` = @__id_0
+LIMIT 1
+Information : 20101 - Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SET AUTOCOMMIT = 1;
+DELETE FROM `Categorias`
+WHERE `CategoriaId` = @p0;
+SELECT ROW_COUNT();
+Information : 0 - Application is shutting down...

@@ -3,7 +3,9 @@ using ApiCatalogo.DTOs;
 using ApiCatalogo.Models;
 using ApiCatalogo.Pagination;
 using ApiCatalogo.Repositories.Interface;
+using Asp.Versioning;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
@@ -14,7 +16,11 @@ using X.PagedList;
 
 namespace ApiCatalogo.Controllers
 {
-    [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [ApiVersion("1.0")]
+    [ApiConventionType(typeof(DefaultApiConventions))]
+    [Produces("application/json")]
+    [Route("api/{v:apiVersion}/[controller]")]
     [ApiController]
     public class ProdutosController : ControllerBase
     {
@@ -77,7 +83,7 @@ namespace ApiCatalogo.Controllers
         /// Exibe uma relação dos produtos
         /// </summary>
         /// <returns>Retorna uma lista de objetos Produto</returns>
-        [Authorize(Policy ="UserOnly")]
+        //[Authorize(Policy ="UserOnly")]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
