@@ -7,6 +7,7 @@ using ApiCatalogo.Pagination;
 using ApiCatalogo.Repositories;
 using ApiCatalogo.Repositories.Interface;
 using ApiCatalogo.Services;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -18,12 +19,13 @@ using X.PagedList;
 
 namespace ApiCatalogo.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
     [EnableCors("OrigensComAcessoPermitido")]
     [EnableRateLimiting("fixedwindow")]
+    [ApiVersion("1.0")]
     [Produces("application/json")]
     [ApiConventionType(typeof(DefaultApiConventions))]
+    [Route("api/{v:apiVersion}/[controller]")]
+    [ApiController]
     public class CategoriasController : ControllerBase
     {
         private readonly IUnitOfWork _uof;
@@ -177,7 +179,7 @@ namespace ApiCatalogo.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        [Authorize(Policy ="AdminOnly")]
+        //[Authorize(Policy ="AdminOnly")]
         public async Task<ActionResult<CategoriaDTO>> Delete(int id)
         {
             var categoria = await _uof.CategoriaRepository.GetAsync(c => c.CategoriaId == id);
